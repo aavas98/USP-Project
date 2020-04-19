@@ -20,11 +20,12 @@ public class Menu {
 		System.out.println("3. Brand Listing");
 		System.out.println("4. Model Listing");
 		System.out.println("5. Year Listing");
+		System.out.println("6. Feature Listing");
 		System.out.println("0. Exit Program");
 		do {
 			System.out.println("Select Option: ");
 			choice = sc.nextInt();
-		} while(choice < 0 || choice > 5);
+		} while(choice < 0 || choice > 6);
 		
 		switch(choice) {
 		case 1:
@@ -46,6 +47,10 @@ public class Menu {
 			break;
 		case 5:
 			YearListing();
+			MainMenu();
+			break;
+		case 6:
+			FeatureListing();
 			MainMenu();
 			break;
 		case 0:
@@ -144,6 +149,28 @@ public class Menu {
 		
 	    Query query = session.createQuery("FROM  Car WHERE Year = ?0");
 	    query.setParameter(0, Year);
+	    List list = query.list();
+	    
+	    for	 (int i = 0; i < list.size(); i++) {
+	    	(( Car ) list.get(i)).PrintCar();
+	    }
+	    
+	    t.commit();
+		session.close();		
+	}
+	
+	public void FeatureListing() {
+		int Feature;
+		Scanner scS = new Scanner(System.in);
+		System.out.println("Search by Feature: ");
+	    Feature = scS.nextInt();
+		SessionFactory factory;
+		factory = new Configuration().configure().buildSessionFactory();
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		
+	    Query query = session.createQuery("FROM  Car WHERE Features = ?0");
+	    query.setParameter(0, Feature);
 	    List list = query.list();
 	    
 	    for	 (int i = 0; i < list.size(); i++) {
