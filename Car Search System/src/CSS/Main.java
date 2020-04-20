@@ -1,7 +1,7 @@
 package CSS;
 import java.text.ParseException;
 
-/* Github Test 2*/
+/* Github Screenshots*/
 
 public class Main {
 	public static void main(String[] args) throws ParseException {
